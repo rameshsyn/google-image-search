@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image Search Abstraction Layer</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    </head>
+    <body>
+        <div class="container-fluid">
+        <div class="search-area">
+        <a href="/"><h1>Google Image Search API</h1></a>
+        <form method="post" action="/api/imagesearch">
+            <input type="text" name="searchQuery" placeholder="Search image" required/>
+            <button type="submit">Search</button>
+            {{#if jsonlink}}
+            <a href="{{jsonlink}}" target="_blank"><button type="button">Get JSON</button></a>
+            {{else}}
+            <a href="/api/imagesearch/latest" target="_blank"><button type="button">Latest query</button></a>
+            {{/if}}
+        </form>
+        </div>
+        
+        <div class="display-area">
+                <div class="container">
+                    <div class="img-container">
+                        {{# if data }}
+                        {{# each data }}
+                            <img class="img-responsive img" src="{{this.link}}"/>
+                        {{/each}}
+                        {{else}}
+                            <div class="usage">
+                                <h1>Usage:</h1><br>
+                                Latest: 
+                                <code>
+                                    https://search-imgg.herokuapp.com/api/imagesearch/latest
+                                </code><br><br>
+                                JSON: 
+                                <code>
+                                    https://search-imgg.herokuapp.com/api/imagesearch?q={search}&format=json
+                                </code>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+        </div>
+        
+        </div>
+    </body>
+</html>
